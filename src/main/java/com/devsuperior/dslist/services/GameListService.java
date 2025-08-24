@@ -19,31 +19,14 @@ import com.devsuperior.dslist.repositories.GameRepository;
 
 
 @Service
-public class GameService {
+public class GameListService {
 	
 	@Autowired
-	private GameRepository gameRepository;
-	
+	private GameListRepository gameListRepository;
+
 	@Transactional(readOnly = true)
-	public List<GameMinDTO> findAllGameMin(){
-		List<Game> result = gameRepository.findAll();
-		return result.stream().map(x -> new GameMinDTO(x)).toList();
-	}
-	
-	@Transactional(readOnly = true)
-	public List<GameDTO> findAllGame(){
-		List<Game> result = gameRepository.findAll();
-		return result.stream().map(x -> new GameDTO(x)).toList();
-	}
-	
-	@Transactional(readOnly = true)
-	public GameDTO findById(Long id) {
-		try {
-			Game result = gameRepository.findById(id).get();
-			GameDTO dto = new GameDTO(result);
-			return dto;
-		} catch (Exception e) {
-			throw new RuntimeException("Game não encontrado");
-		}
+	public List<GameListDTO> findAllGameList(){
+		List<GameList> result = gameListRepository.findAll();
+		return result.stream().map(x -> new GameListDTO(x)).toList();
 	}
 }
